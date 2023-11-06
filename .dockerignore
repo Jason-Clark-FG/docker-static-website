@@ -1,4 +1,7 @@
 .git/
+.github/
+.gitignore
+.dockerignore
 Dockerfile
 *.Dockerfile
 README.md

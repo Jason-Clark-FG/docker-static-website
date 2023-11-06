@@ -54,7 +54,7 @@ For every file that should be served gzipped, add a matching `[FILENAME].gz` to 
 
 Add a `httpd.conf` file and use the `P` directive:
 
-```
+```sh
 P:/some/old/path:[http://]hostname[:port]/some/new/path
 ```
 
@@ -62,7 +62,7 @@ P:/some/old/path:[http://]hostname[:port]/some/new/path
 
 Add a `httpd.conf` file and use the `E404` directive:
 
-```
+```sh
 E404:e404.html
 ```
 
@@ -74,7 +74,7 @@ Note that the error page directive is only processed for your main `httpd.conf` 
 
 Add a `httpd.conf` file and use the `A` and `D` directives:
 
-```
+```sh
 A:172.20.         # Allow address from 172.20.0.0/16
 A:10.0.0.0/25     # Allow any address from 10.0.0.0-10.0.0.127
 A:127.0.0.1       # Allow local loopback connections
@@ -83,7 +83,7 @@ D:*               # Deny from other IP connections
 
 You can also allow all requests with some exceptions:
 
-```
+```sh
 D:1.2.3.4
 D:5.6.7.8
 A:* # This line is optional
@@ -93,7 +93,7 @@ A:* # This line is optional
 
 Add a `httpd.conf` file, listing the paths that should be protected and the corresponding credentials:
 
-```
+```sh
 /admin:my-user:my-password # Require user my-user with password my-password whenever calling /admin
 ```
 
@@ -105,7 +105,7 @@ Read the [source code comments](https://git.busybox.net/busybox/tree/networking/
 
 Clone the [busybox repo](https://git.busybox.net/busybox/tree) and create a blank config:
 
-```
+```sh
 make allnoconfig
 ```
 
@@ -113,13 +113,13 @@ Copy the resulting `.config` to this project, diff it against the old one and re
 
 Uncomment the `COPY . .` line in the `Dockerfile`, add a dummy `index.html` and build a test image:
 
-```
+```sh
 docker build -t docker-static-website-test .
 ```
 
 Then run it:
 
-```
+```sh
 docker run -it --rm --init -p 3000:3000 docker-static-website-test
 ```
 
@@ -129,21 +129,19 @@ Browse to `http://localhost:3000` and check that the contents of the `index.html
 
 Build the image:
 
-```
+```sh
 docker build -t lipanski/docker-static-website:1.2.3 .
 ```
 
 Push the image to Docker Hub:
 
-```
+```sh
 docker push lipanski/docker-static-website:1.2.3
 ```
 
 Tag the release:
 
-```
+```sh
 git tag 1.2.3
 git push --tags
 ```
-
-
